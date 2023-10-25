@@ -4,19 +4,26 @@
  */
 package cadastroclienteswing;
 
+import clanger.dao.ClientMapDao;
+import clanger.dao.iClientDao;
+import clanger.domain.Cliente;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author c-lan
  */
 public class MainScreen extends javax.swing.JFrame {
-
+    
+    private DefaultTableModel model = new DefaultTableModel();
+    private iClientDao clientDao = new ClientMapDao();
     /**
      * Creates new form MainScreen
      */
     public MainScreen() {
         initComponents();
+        initCustomComponents();
     }
 
     /**
@@ -28,11 +35,42 @@ public class MainScreen extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        lblName = new javax.swing.JLabel();
+        txtFieldName = new javax.swing.JTextField();
+        btnSave = new javax.swing.JButton();
+        lblCpf = new javax.swing.JLabel();
+        txtFieldCpf = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tableClients = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        lblName.setText("Name:");
+
+        btnSave.setText("Save");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
+
+        lblCpf.setText("CPF:");
+
+        tableClients.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(tableClients);
 
         jMenu1.setText("Options");
 
@@ -52,11 +90,35 @@ public class MainScreen extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(59, 59, 59)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSave)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblName, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtFieldName, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)
+                        .addComponent(lblCpf)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtFieldCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(67, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 277, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblName)
+                    .addComponent(txtFieldName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblCpf)
+                    .addComponent(txtFieldCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(46, 46, 46)
+                .addComponent(btnSave)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         pack();
@@ -71,6 +133,24 @@ public class MainScreen extends javax.swing.JFrame {
             System.exit(0);
         }
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        String name = txtFieldName.getText();
+        String cpf = txtFieldCpf.getText();
+        if(isValid(name, cpf)){
+            JOptionPane.showMessageDialog(null, name + " " + cpf, "Client", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, "Não deixe o campo vazio", "Alerta", JOptionPane.INFORMATION_MESSAGE);
+        }       
+        Cliente client = new Cliente(name, cpf, "", "", cpf, "", "");
+        Boolean isRegistered = this.clientDao.cadastrar(client);
+        if(isRegistered){
+            model.addRow(new Object[]{client.getName(), client.getCpf()});
+            cleanFields();
+        } else {
+            JOptionPane.showMessageDialog(null, "Client alredy exist", "Alert", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_btnSaveActionPerformed
 
     /**
      * @param args the command line arguments
@@ -108,8 +188,36 @@ public class MainScreen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnSave;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblCpf;
+    private javax.swing.JLabel lblName;
+    private javax.swing.JTable tableClients;
+    private javax.swing.JTextField txtFieldCpf;
+    private javax.swing.JTextField txtFieldName;
     // End of variables declaration//GEN-END:variables
+
+    private boolean isValid(String ...fields) {
+        for(String field : fields){
+           if(field.equals("")){
+               return false;
+           }
+        }
+        return true;
+    }
+
+    private void initCustomComponents() {
+        model.addColumn("Name");
+        model.addColumn("CPF");
+        
+        tableClients.setModel(model);
+    }
+    
+    private void cleanFields(){
+        txtFieldName.setText("");
+        txtFieldCpf.setText("");
+    }
 }
