@@ -42,6 +42,19 @@ public class MainScreen extends javax.swing.JFrame {
         txtFieldCpf = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableClients = new javax.swing.JTable();
+        btnEdit = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
+        txtFieldTelephone = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        txtFieldAddress = new javax.swing.JTextField();
+        txtFieldCity = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        txtFieldNumber = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        txtFieldState = new javax.swing.JTextField();
+        btnClean = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -70,7 +83,43 @@ public class MainScreen extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tableClients.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableClientsMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tableClients);
+
+        btnEdit.setText("Edit");
+        btnEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditActionPerformed(evt);
+            }
+        });
+
+        btnDelete.setText("Delete");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Telaphone:");
+
+        jLabel2.setText("Address:");
+
+        jLabel3.setText("City:");
+
+        jLabel4.setText("Number:");
+
+        jLabel5.setText("State:");
+
+        btnClean.setText("Clean");
+        btnClean.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCleanActionPerformed(evt);
+            }
+        });
 
         jMenu1.setText("Options");
 
@@ -93,32 +142,79 @@ public class MainScreen extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(59, 59, 59)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSave)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblName, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(lblName, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(txtFieldTelephone, javax.swing.GroupLayout.DEFAULT_SIZE, 241, Short.MAX_VALUE)
+                                    .addComponent(txtFieldName)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtFieldCity)
+                                    .addComponent(txtFieldAddress)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(btnClean)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnSave)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtFieldName, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12)
-                        .addComponent(lblCpf)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(lblCpf)
+                            .addComponent(jLabel5))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtFieldCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(67, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnEdit)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnDelete))
+                            .addComponent(txtFieldCpf, javax.swing.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE)
+                            .addComponent(txtFieldNumber)
+                            .addComponent(txtFieldState)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 656, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(59, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(14, 14, 14)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblName)
-                    .addComponent(txtFieldName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblCpf)
+                    .addComponent(txtFieldName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblName)
                     .addComponent(txtFieldCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(46, 46, 46)
-                .addComponent(btnSave)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtFieldTelephone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtFieldAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4)
+                    .addComponent(txtFieldNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtFieldCity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel5)
+                    .addComponent(txtFieldState, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(106, 106, 106)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSave)
+                    .addComponent(btnEdit)
+                    .addComponent(btnDelete)
+                    .addComponent(btnClean))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(11, Short.MAX_VALUE))
         );
 
         pack();
@@ -137,20 +233,81 @@ public class MainScreen extends javax.swing.JFrame {
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         String name = txtFieldName.getText();
         String cpf = txtFieldCpf.getText();
+        String address = txtFieldAddress.getText();
+        String city = txtFieldCity.getText();
+        String number = txtFieldNumber.getText();
+        String state = txtFieldState.getText();
+        String telephone = txtFieldTelephone.getText();
+        
         if(isValid(name, cpf)){
             JOptionPane.showMessageDialog(null, name + " " + cpf, "Client", JOptionPane.INFORMATION_MESSAGE);
         } else {
             JOptionPane.showMessageDialog(null, "Não deixe o campo vazio", "Alerta", JOptionPane.INFORMATION_MESSAGE);
         }       
-        Cliente client = new Cliente(name, cpf, "", "", cpf, "", "");
+        Cliente client = new Cliente(name, cpf, telephone, address, number, city, state);
         Boolean isRegistered = this.clientDao.cadastrar(client);
         if(isRegistered){
-            model.addRow(new Object[]{client.getName(), client.getCpf()});
+            model.addRow(new Object[]{client.getName(), client.getCpf(), client.getTelephone(),client.getAddress(),client.getNumber(),client.getCity(),client.getState()});
             cleanFields();
         } else {
             JOptionPane.showMessageDialog(null, "Client alredy exist", "Alert", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_btnSaveActionPerformed
+
+    private void tableClientsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableClientsMouseClicked
+        int selectedRow = tableClients.getSelectedRow();
+        Long cpf = (Long) tableClients.getValueAt(selectedRow, 1);
+        
+        Cliente cliente = this.clientDao.consultar(cpf);
+        txtFieldName.setText(cliente.getName());
+        txtFieldCpf.setText(cliente.getCpf().toString());
+        
+    }//GEN-LAST:event_tableClientsMouseClicked
+
+    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
+        int selectedRow = tableClients.getSelectedRow();
+        String name = txtFieldName.getText();
+        String address = txtFieldAddress.getText();
+        String city = txtFieldCity.getText();
+        String number = txtFieldNumber.getText();
+        String state = txtFieldState.getText();
+        String telephone = txtFieldTelephone.getText();
+        if(selectedRow >=0){
+            int result = JOptionPane.showConfirmDialog(this, "Deseja alterar usuario?","Cuidado",
+                    JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if(result == JOptionPane.YES_OPTION){
+                String cpf =tableClients.getValueAt(selectedRow, 1).toString();
+                Cliente client = new Cliente(name, cpf, telephone, address, number, city, state);
+                model.removeRow(selectedRow);
+                model.addRow(new Object[]{client.getName(), client.getCpf(), client.getTelephone(),client.getAddress(),client.getNumber(),client.getCity(),client.getState()});
+                this.clientDao.alterar(client);
+                
+            }
+        }
+    }//GEN-LAST:event_btnEditActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        int selectedRow = tableClients.getSelectedRow();
+        
+        if(selectedRow >= 0){
+            int result = JOptionPane.showConfirmDialog(this, "Deseja realmente excluir?","Cuidado",
+                    JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if(result == JOptionPane.YES_OPTION){
+                Long cpf =(Long) tableClients.getValueAt(selectedRow, 1);
+                this.clientDao.excluir(cpf);
+                model.removeRow(selectedRow);
+                
+                JOptionPane.showMessageDialog(null, "Cliente excluido", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                cleanFields();
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Nenhum cliente selecionado", "Erro", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void btnCleanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCleanActionPerformed
+        cleanFields();
+    }//GEN-LAST:event_btnCleanActionPerformed
 
     /**
      * @param args the command line arguments
@@ -188,7 +345,15 @@ public class MainScreen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnClean;
+    private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnEdit;
     private javax.swing.JButton btnSave;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
@@ -196,8 +361,13 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JLabel lblCpf;
     private javax.swing.JLabel lblName;
     private javax.swing.JTable tableClients;
+    private javax.swing.JTextField txtFieldAddress;
+    private javax.swing.JTextField txtFieldCity;
     private javax.swing.JTextField txtFieldCpf;
     private javax.swing.JTextField txtFieldName;
+    private javax.swing.JTextField txtFieldNumber;
+    private javax.swing.JTextField txtFieldState;
+    private javax.swing.JTextField txtFieldTelephone;
     // End of variables declaration//GEN-END:variables
 
     private boolean isValid(String ...fields) {
@@ -212,6 +382,11 @@ public class MainScreen extends javax.swing.JFrame {
     private void initCustomComponents() {
         model.addColumn("Name");
         model.addColumn("CPF");
+        model.addColumn("Telephone");
+        model.addColumn("Address");
+        model.addColumn("Number");
+        model.addColumn("City");
+        model.addColumn("State");
         
         tableClients.setModel(model);
     }
@@ -219,5 +394,10 @@ public class MainScreen extends javax.swing.JFrame {
     private void cleanFields(){
         txtFieldName.setText("");
         txtFieldCpf.setText("");
+        txtFieldAddress.setText("");
+        txtFieldCity.setText("");
+        txtFieldNumber.setText("");
+        txtFieldState.setText("");
+        txtFieldTelephone.setText("");
     }
 }

@@ -6,6 +6,7 @@ package clanger.dao;
 
 import clanger.domain.Cliente;
 import java.util.Map;
+import java.util.Objects;
 import java.util.TreeMap;
 
 /**
@@ -30,17 +31,45 @@ public class ClientMapDao implements iClientDao{
 
     @Override
     public void excluir(Long cpf) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        Cliente clientCadastrado = this.map.get(cpf);
+        
+        if(clientCadastrado != null){
+            this.map.remove(cpf,clientCadastrado);
+        }
     }
 
     @Override
     public void alterar(Cliente cliente) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        Cliente clienteCadastrado = this.map.get(cliente.getCpf());		
+            if(clienteCadastrado != null) {
+                clienteCadastrado.setName(cliente.getName());
+                clienteCadastrado.setCity(cliente.getCity());
+                clienteCadastrado.setAddress(cliente.getAddress());
+                clienteCadastrado.setNumber(cliente.getNumber());
+                clienteCadastrado.setState(cliente.getState());
+                clienteCadastrado.setTelephone(cliente.getTelephone());
+            }
     }
 
     @Override
-    public Cliente consultar(Long CPF) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Cliente consultar(Long cpf) {
+        return this.map.get(cpf);
     }
+    
+    @Override
+	public int hashCode() {
+		return Objects.hash(map);
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ClientMapDao other = (ClientMapDao) obj;
+		return Objects.equals(map, other.map);
+	}
     
 }

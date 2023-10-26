@@ -42,7 +42,7 @@ public class Cliente {
         return this.cpf;
     }
     
-    public String getTelephone(Long cpf){
+    public String getTelephone(){
         return this.telephone;
     }
     public void setTelephone(String telephone){
